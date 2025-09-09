@@ -1,0 +1,50 @@
+header{
+    text-align: center;
+    padding: 40px 0;
+}
+
+footer{
+    text-align: end;
+    font-size: 80%;
+    padding: 5px;
+    border-top: 0.1px solid rgb(129, 129, 129);
+    margin-top: 2%;
+}
+footer p{
+    margin: 0px;
+    letter-spacing: 3px;
+}
+
+.navbar{
+    margin-bottom: 2vh;
+}
+
+#NapUres{
+    display: none;
+}
+#NapTeli{
+    display: block;
+}
+
+#themeSwitch{
+    position: absolute;
+    top: 30px;
+    right: 30px;
+
+}
+
+main{
+    margin: 2%;
+    padding: 0%;
+}
+
+#EnterBTN{
+    margin-top: 1%;
+}
+#RegBTN{
+    margin-top: 1%;
+}
+
+.form-floating{
+    margin-bottom: 1.5%;
+}
