@@ -74,30 +74,32 @@ async function login(){
         return
     }
 
-    let users = [];
+    let user = {};
     try{
-        const res = await fetch(`${SERVER_URL}/users`)
-        users = await res.json();
-        
-        
-        users.forEach(user => {
-            if(user.email == loginEmailField.value && user.password == loginPasswordField.value)
-            {
-                loggedUser = user
-                showMSG('success','Siker!','Sikeresen bejelentkeztés. Átirányítás folyamatban')
-
-                
-                return
-            }
-            else
-            {
-                showMSG('danger','Hiba','Az email cím vagy a jelszó helytelen')
-                return
-            }
+        const res = await fetch(`${SERVER_URL}/users/login`, {
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: loginEmailField.value,
+                password: loginPasswordField.value
+            })
         })
+        user = await res.json();
+        if(user.id != undefined){
+            loggedUser = user;
+        }
+        
+        
+        if(!loggedUser){
+            showMSG('danger', 'Hiba', 'Hibás belépési adatok!')
+            return
+        }
         sessionStorage.setItem('loggedUser', JSON.stringify(loggedUser));
-        await render('home')
         getLoggedUser()
+        await render('home')
+
 
 
 
