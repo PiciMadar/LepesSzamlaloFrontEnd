@@ -30,16 +30,28 @@
                     <span class="navbar-toggler-icon"></span>
                   </button>
                   <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                      
+
+                    <ul class="navbar-nav " id="mainmenu">  
                       <li class="nav-item">
                         <a class="nav-link" href="#" onclick="render('login')">Belépés</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="#" onclick="render('registration')">Regisztráció</a>
                       </li>
-
                     </ul>
+
+                    <ul class="navbar-nav d-none" id="usermenu">
+                      <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="render('home')">Lépésadatok kezelése</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="render('statistics')">Statisztikák</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="logout()">Kilépés</a>
+                      </li>
+                    </ul>
+
                   </div>
                 </div>
               </nav>
@@ -48,11 +60,7 @@
         <main>
              <!--Taralom-->
             
-            <div class="text-center">
-                <div class="spinner-border" role="status">
-                  <span class="visually-hidden">Loading...</span>
-                </div>
-              </div>
+
         </main>
 
 
@@ -70,6 +78,7 @@
     <script src="./assets/javascript/app.js"></script>
 
     <!--Controllers-->
+    <script src="controllers/messageCTRL.js"></script>
     <script src="controllers/userCTRL.js"></script>
 </body>
 </html>

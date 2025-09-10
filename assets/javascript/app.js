@@ -11,10 +11,13 @@ author.innerHTML = Author
 
 
 let theme = "light"
+let loggedUser = null
 let NapTeli = document.querySelector("#NapTeli")
 let NapUres = document.querySelector("#NapUres")
 
 let main = document.querySelector("main")
+let mainMenu = document.querySelector("#mainmenu")
+let userMenu = document.querySelector("#usermenu")
 
 NapTeli.addEventListener('click', () => {
     NapTeli.style.display = "none"
@@ -57,5 +60,22 @@ async function render(view){
     main.innerHTML = await (await fetch(`views/${view}.html`)).text();
 }
 
+
+async function getLoggedUser(){
+    if(sessionStorage.getItem('loggedUser')){
+        loggedUser = JSON.parse(sessionStorage.getItem('loggedUser'));
+        mainMenu.classList.add('d-none')
+        userMenu.classList.remove('d-none')
+        await render("home")
+    }
+    else{
+        mainMenu.classList.remove('d-none')
+        userMenu.classList.add('d-none')
+        await render('login')
+    }
+}
+
+
 loadTheme()
-render('registration')
+
+getLoggedUser()

@@ -1,5 +1,6 @@
 const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
 const emailRegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const SERVER_URL = 'http://localhost:3000';
 
 async function registration(){
     /*await fetch('http://localhost:3000/users')
@@ -12,27 +13,28 @@ async function registration(){
 
 
 
+
     if(NameField.value == '' || emailField.value == '' || passwordField.value == '' || confirmField.value == ''){
-        alert("Nem adtál meg minden adatot!")
+        showMSG('danger','Hiba','Nem adtál meg minden adatot')  
         return
     }
     if(passwordField.value != confirmField.value){
-        alert("A jelszó nem egyezik!")
+        showMSG('danger','Hiba','A jelszó nem egyezik')  
         return  
     }
 
     if(!passwordRegExp.test(passwordField.value)){
-        alert("A megadott jelszó nem elég biztonságos!")
+        showMSG('danger','Hiba','Nem elég biztonságos a jelszód')  
         return
     }
 
     if(!emailRegExp.test(emailField.value)){
-        alert("Nem megfelelő email cím!")
+        showMSG('danger','Hiba','Nem megfelelő az emal címed')
         return
     }
 
     try{
-        const respond = await fetch('http://localhost:3000/users', {
+        const respond = await fetch(`${SERVER_URL}/users`, {
             method:"POST",
             headers: {
                 'Content-Type' : 'application/json'
@@ -62,11 +64,56 @@ async function registration(){
 
 }
 
-function login(){
+async function login(){
+    let loginEmailField = document.querySelector('#floatingLogEInput')
+    let loginPasswordField = document.querySelector('#floatingLogPassword')
+
+
+    if(loginEmailField.value == '' || loginPasswordField.value == ''){
+        showMSG('danger','Hiba','Nem adtál meg minden adatot')  
+        return
+    }
+
+    let users = [];
+    try{
+        const res = await fetch(`${SERVER_URL}/users`)
+        users = await res.json();
+        
+        
+        users.forEach(user => {
+            if(user.email == loginEmailField.value && user.password == loginPasswordField.value)
+            {
+                loggedUser = user
+                showMSG('success','Siker!','Sikeresen bejelentkeztés. Átirányítás folyamatban')
+
+                
+                return
+            }
+            else
+            {
+                showMSG('danger','Hiba','Az email cím vagy a jelszó helytelen')
+                return
+            }
+        })
+        sessionStorage.setItem('loggedUser', JSON.stringify(loggedUser));
+        await render('home')
+        getLoggedUser()
+
+
+
+    }
+    catch(err)
+    {
+        console.log("Hiba!\n" + err)
+    }
 
 }
 
 function logout(){
+    sessionStorage.removeItem('loggedUser')
+    getLoggedUser()
+    alert('logout')
+    render('login')
 
 }
 
