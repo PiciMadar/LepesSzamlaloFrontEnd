@@ -14,6 +14,7 @@ async function registration(){
 
 
 
+
     if(NameField.value == '' || emailField.value == '' || passwordField.value == '' || confirmField.value == ''){
         showMSG('danger','Hiba','Nem adtál meg minden adatot')  
         return
@@ -58,8 +59,8 @@ async function registration(){
             confirmField.value = '';
         }
     }   
-    catch(  err){
-        console.log("Hiba történt! ", err)
+    catch(err){
+        console.log("Hiba történt! ",err)
     }
 
 }
@@ -119,16 +120,97 @@ function logout(){
 
 }
 
-function getProfile(){
-
+async function getProfile(){
+    const loggedUser = JSON.parse(sessionStorage.getItem('loggedUser'))
+    try{
+        const res = await fetch(`${SERVER_URL}/users/${loggedUser.id}`)
+        const user = await res.json()
+        
+        document.querySelector("#OldNameField").value = user.name
+        document.querySelector("#OldEmailField").value = user.email
+    }
+    catch(err){
+        console.log(err)
+    }
 }
 
-function updateProfile(){
+async function updateProfile(){
+    let newName = document.querySelector("#OldNameField").value
+    let newMail = document.querySelector("#OldEmailField").value
 
+    if(newName == '' || newMail == ''){
+        showMSG('danger','Hiba', 'Nem adtál meg mindent adatot')
+        return
+    }
+
+    try{
+        const res = await fetch(`${SERVER_URL}/users/profile/${loggedUser.id}`,{
+            method: 'PATCH',
+            headers:{
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id : loggedUser.id,
+                OldName : newName,
+                OldEmail : newMail
+            })
+        });
+        let data = await res.json();
+        if(res.status == 200){
+            showMSG('success', 'Ok', data.msg)
+        }
+        else{
+            showMSG('danger', 'Ok', data.msg)
+        }
+
+    } catch(err) {
+        console.log(err)
+        showMSG("warning","Hiba","Nem sikerült módosítani")
+    }
 }
 
-function updatePassword(){
+async function updatePassword(){
+    let OldPassword = document.querySelector("#OldPasswordField").value
+    let NewPassword = document.querySelector("#NewPasswordField").value
+    let NewPasswordCon = document.querySelector("#NewPasswordFieldCon").value
 
+
+    if(OldPassword == '' ||NewPassword == '' || NewPasswordCon == ''){
+        showMSG('warning','Hiba','Nem adtál meg mindent')
+        return
+    }
+
+    if(NewPassword != NewPasswordCon){
+        showMSG('warning', 'hiba', 'Nem stimmel a kettő jelszó')
+        return
+    }
+    if(!passwordRegExp.test(NewPassword.value)){
+        showMSG('danger','Hiba','Nem elég biztonságos a jelszód')  
+        return
+    }
+
+    try{
+        const res = await fetch(`${SERVER_URL}/users/passmod`,{
+            method: 'PATCH',    
+            headers:{
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id : loggedUser.id,
+                OldPassword : OldPassword,
+                NewPassword : NewPassword
+            })
+        });
+        let data = await res.json();
+        if(res.status == 200){
+            showMSG('success', 'Ok', data.msg)
+        }
+        else{
+            showMSG('danger', 'Ok', data.msg)
+        }
+
+    }
+    catch(err){
+        console.log(err)
+    }
 }
-
-function nemEmelFol(segitseg){alert("Nagyon fáj")}

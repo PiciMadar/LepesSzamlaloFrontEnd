@@ -6,30 +6,30 @@
     <div class="col-12 col-lg-6">
         <h5>Profil adatok</h5>
             <div class="form-floating">
-                <input type="password" class="form-control" id="floatingLogPassword" placeholder="Password">
-                <label for="floatingLogPassword">Név</label>
+                <input type="text" class="form-control" id="OldNameField" placeholder="Password">
+                <label for="OldNameField">Név</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" id="floatingLogPassword" placeholder="Password">
-                <label for="floatingLogPassword">Email</label>
+                <input type="email" class="form-control" id="OldEmailField" placeholder="Password">
+                <label for="OldEmailField">Email</label>
             </div>
-            <button type="button" class="btn btn-success" id="EnterBTN" onclick="">Módosítás</button>
+            <button type="button" class="btn btn-success" id="updateProfileBTN" onclick="updateProfile()">Módosítás</button>
     </div>
     <div class="col-12 col-lg-6">
         <h5>Jelszó módosítása</h5>
             <div class="form-floating">
-                <input type="password" class="form-control" id="floatingLogPassword" placeholder="Password">
-                <label for="floatingLogPassword">Régi jelszó</label>
+                <input type="password" class="form-control" id="OldPasswordField" placeholder="Password">
+                <label for="OldPasswordField">Régi jelszó</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" id="floatingLogPassword" placeholder="Password">
-                <label for="floatingLogPassword">Új jelszó</label>
+                <input type="password" class="form-control" id="NewPasswordField" placeholder="Password">
+                <label for="NewPasswordField">Új jelszó</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" id="floatingLogPassword" placeholder="Password">
-                <label for="floatingLogPassword">Új jelszó megerősítése</label>
+                <input type="password" class="form-control" id="NewPasswordFieldCon" placeholder="Password">
+                <label for="NewPasswordFieldCon">Új jelszó megerősítése</label>
             </div>
-            <button type="button" class="btn btn-success" id="EnterBTN" onclick="">Módosítás</button>
+            <button type="button" class="btn btn-success" id="updatePasswordBTN" onclick="updatePassword()">Módosítás</button>
     </div>
 </div>
 

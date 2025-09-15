@@ -2,11 +2,46 @@
 <hr>
 <div id="messageBox"></div>
 
-<div class="text-center" id="Toltikezes">
-    <div class="spinner-border" role="status" >
-      <span class="visually-hidden">Loading...</span>
-    </div>
+<!--Űrlap-->
+<div class="row">
+  <div class="form-floating mb-3 col-12 col-lg-4  ">
+    <input type="date" class="form-control" id="dateField" placeholder="">
+    <label for="dateField">Dátum</label>
+  </div>
+  <div class="form-floating mb-3 col-12 col-lg-4" >
+    <input type="number" class="form-control" id="countField" placeholder="">
+    <label for="countField">Lépésszám</label>
+  </div>
+  
+  <div class="col-12 col-lg-4 mb-3">
+    <button type="button" class="btn btn-success" id="addBTN" onclick="add()">Hozzáadás</button>
+    <button type="button" class="btn btn-warning d-none" id="updateBTN" onclick="update()">Módosítás</button>
+    <button type="button" class="btn btn-danger d-none" id="delBTN" onclick="del()">Törlés</button>
+    <button type="button" class="btn btn-secondary d-none" id="cancelBTN" onclick="add()">Mégsem</button>
+  </div>
+  
 </div>
+
+<!--Felvett táblázat-->
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="text-center">#</th>
+        <th class="text-start">Dátum</th>
+        <th class="text-end">Lépésszám</th>
+        <th class="text-end">Műveletek</th>
+      </tr>
+    </thead>
+    <tbody>
+        <!--Ide jöhet a tartalom dinamikusan-->
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="4" class="text-center">Összesen: <span>0</span> lépés</td>
+      </tr>
+    </tfoot>
+  </table>
+
 
 
 <hr>
