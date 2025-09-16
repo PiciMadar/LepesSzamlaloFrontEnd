@@ -70,6 +70,11 @@ async function render(view){
             renderSteps()
             break
         }
+        case "statistics" :{
+            await getChartData();
+            initChart();
+            break;
+        }
     }
 }
 
