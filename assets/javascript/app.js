@@ -66,6 +66,8 @@ async function render(view){
         }
         case "home" :{
             setDate()
+            await getSteps()
+            renderSteps()
             break
         }
     }

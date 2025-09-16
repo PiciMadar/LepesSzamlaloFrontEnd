@@ -14,10 +14,10 @@
   </div>
   
   <div class="col-12 col-lg-4 mb-3">
-    <button type="button" class="btn btn-success" id="addBTN" onclick="add()">Hozzáadás</button>
+    <button type="button" class="btn btn-success" id="addBTN" onclick="addData()">Hozzáadás</button>
     <button type="button" class="btn btn-warning d-none" id="updateBTN" onclick="update()">Módosítás</button>
-    <button type="button" class="btn btn-danger d-none" id="delBTN" onclick="del()">Törlés</button>
-    <button type="button" class="btn btn-secondary d-none" id="cancelBTN" onclick="add()">Mégsem</button>
+    <button type="button" class="btn btn-danger d-none" id="delBTN" onclick="delF()">Törlés</button>
+    <button type="button" class="btn btn-secondary d-none" id="cancelBTN" onclick="cancel()">Mégsem</button>
   </div>
   
 </div>
@@ -28,20 +28,17 @@
       <tr>
         <th class="text-center">#</th>
         <th class="text-start">Dátum</th>
-        <th class="text-end">Lépésszám</th>
+        <th class="text-end ">Lépésszám</th>
         <th class="text-end">Műveletek</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="Tablazat">
+
         <!--Ide jöhet a tartalom dinamikusan-->
     </tbody>
     <tfoot>
       <tr>
-        <td colspan="4" class="text-center">Összesen: <span>0</span> lépés</td>
+        <td colspan="4" class="text-center">Összesen: <span id="sumSP" class="text-info">0</span> lépés</td>
       </tr>
     </tfoot>
   </table>
-
-
-
-<hr>
