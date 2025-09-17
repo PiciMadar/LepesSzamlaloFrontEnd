@@ -75,6 +75,11 @@ async function render(view){
             initChart();
             break;
         }
+        case "calendar":{
+            await getCalendarData();
+            initCalendar();
+            break
+        }
     }
 }
 

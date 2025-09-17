@@ -38,6 +38,9 @@ function initChart(){
             }]
         },
         options: {
+          scales:{
+            y:{beginAtZero:true}
+          },
           responsive: true,
           plugins: {
             legend: {
